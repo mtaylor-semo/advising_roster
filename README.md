@@ -10,6 +10,6 @@ Simple R script to make a table of my student advisees.
 
 * Save as roster_\[sf\]\[202x\].html
 
-* Open advisee_list.Rmd. Edit the semester to semester and year.
+* Open advisee_list.Rmd. Edit `semester` to semester and year.
 
 * Knit to PDF.
