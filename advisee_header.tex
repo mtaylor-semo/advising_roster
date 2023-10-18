@@ -1,0 +1,21 @@
+\AtBeginDocument{\let\maketitle\relax}
+
+\usepackage{fontspec}
+\setmainfont[Ligatures={Common,TeX}, BoldFont={* Bold}, ItalicFont={* Italic}, Numbers={OldStyle}]{Linux Libertine O}
+\usepackage{microtype}
+
+
+\usepackage{fancyhdr}
+\fancyhf{}
+\pagestyle{fancy}
+\setlength{\headheight}{14pt}
+%\fancyhead[R]{\footnotesize \assignmentTitle \thepage}
+%\fancyhead[L]{\footnotesize \coursename}
+
+\fancypagestyle{first_page}{%
+	\fancyhf{}
+	\fancyhead[L]{\coursename}
+	\fancyhead[R]{\textsc{Name:} \stuName}
+	\renewcommand{\headrulewidth}{0pt}
+}
+

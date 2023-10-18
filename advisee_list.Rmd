@@ -1,0 +1,73 @@
+---
+author: "Michael S. Taylor"
+mainfont: Linux Libertine O
+output:
+  pdf_document:
+    latex_engine: lualatex
+    includes:
+      in_header: advisee_header.tex
+---
+
+```{r setup, include=FALSE, echo=FALSE}
+knitr::opts_knit$set(eval.after = "fig.cap")
+options(knitr.table.format = "latex")
+```
+
+```{r include=FALSE, echo=FALSE}
+library(rvest)
+library(dplyr)
+library(janitor)
+library(stringr)
+library(kableExtra)
+
+semester <- "Spring 2024"
+advisor <- "Michael S. Taylor"
+
+html_dat <- read_html("./roster_s2024.html")
+
+roster <- html_dat %>% 
+  html_elements(css = ".datadisplaytable") %>% 
+  html_table()
+
+roster <- roster[[1]] %>% 
+  janitor::clean_names() %>% 
+  filter(!grepl("Email", student_name)) %>% 
+  filter(!is.na(id)) %>% 
+  select(student_name, id, pin = alternate_pin)
+
+email <- 
+  html_dat %>% 
+  html_nodes(xpath = "//a[starts-with(@href,'mailto:')]") %>% 
+  html_attr("href")
+
+email <- 
+  email[length(email)] %>% 
+  str_remove("mailto:\\?Bcc=") %>% 
+  str_split(pattern = ";") %>% 
+  unlist()
+
+roster <- 
+  bind_cols(
+    roster, 
+    tibble(email = email)
+  ) %>% 
+  select(`Student Name` = student_name, ID = id, Email = email, PIN = pin) %>% 
+  mutate(ID = str_to_lower(ID),
+         PIN = str_replace_na(PIN, ""))
+
+num_advisees <- dim(roster)[1]
+
+```
+
+
+<!-- Have to be defined here so they can be used in LaTex header. -->
+<!-- First page header -->
+Michael S. Quaylor \newline
+`r paste0(semester, " (", num_advisees, " advisees)")`
+
+```{r echo=FALSE}
+knitr::kable(roster, booktabs = TRUE)
+```
+
+<!-- Time stamp the report 
+\thispagestyle{last_page}-->
