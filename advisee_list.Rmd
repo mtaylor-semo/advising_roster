@@ -9,7 +9,6 @@ output:
 ---
 
 ```{r setup, include=FALSE, echo=FALSE}
-knitr::opts_knit$set(eval.after = "fig.cap")
 options(knitr.table.format = "latex")
 ```
 
