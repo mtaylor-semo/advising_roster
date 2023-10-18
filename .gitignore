@@ -1,5 +1,8 @@
 .DStore
 
+# Do not commit the html roster files
+*.html 
+
 # History files
 .Rhistory
 .Rapp.history
