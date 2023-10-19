@@ -12,9 +12,8 @@ html_dat <- read_html("./roster_s2024.html")
 
 roster <- html_dat %>% 
   html_elements(css = ".datadisplaytable") %>% 
-  html_table()
-
-roster <- roster[[1]] %>% 
+  html_table() %>% 
+  purrr::pluck(1) %>% 
   janitor::clean_names() %>% 
   filter(!grepl("Email", student_name)) %>% 
   filter(!is.na(id)) %>% 
@@ -23,7 +22,7 @@ roster <- roster[[1]] %>%
 email <- 
   html_dat %>% 
   html_elements(xpath = "//a[starts-with(@href,'mailto:')]") %>% 
-  html_attr("href")
+  html_attrs()
 
 email <- 
   email[length(email)] %>% 
