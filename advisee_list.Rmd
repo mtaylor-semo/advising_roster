@@ -15,7 +15,7 @@ options(knitr.table.format = "latex")
 ```{r include=FALSE, echo=FALSE}
 library(rvest)
 library(dplyr)
-library(janitor)
+#library(janitor)
 library(stringr)
 library(kableExtra)
 
@@ -38,8 +38,8 @@ email <-
   html_elements(xpath = "//a[starts-with(@href,'mailto:')]") %>% 
   html_attr("href") %>% 
   last() %>% # takes last item from vector, so mailto email string
-  stringr::str_remove("mailto:\\?Bcc=") %>% 
-  stringr::str_split(pattern = ";") %>% 
+  str_remove("mailto:\\?Bcc=") %>% 
+  str_split(pattern = ";") %>% 
   unlist()
 
 roster <- 

@@ -1,6 +1,5 @@
 library(rvest)
 library(dplyr)
-library(janitor)
 library(stringr)
 library(kableExtra)
 
@@ -24,8 +23,8 @@ email <-
   html_elements(xpath = "//a[starts-with(@href,'mailto:')]") %>% 
   html_attr("href") %>% 
   last() %>% 
-  stringr::str_remove("mailto:\\?Bcc=") %>% 
-  stringr::str_split(pattern = ";") %>% 
+  str_remove("mailto:\\?Bcc=") %>% 
+  str_split(pattern = ";") %>% 
   unlist()
 
 roster <- 
