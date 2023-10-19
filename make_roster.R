@@ -38,4 +38,4 @@ roster <-
 
 num_advisees <- dim(roster)[1]
 
-knitr::kable(roster)
+knitr::kable(roster, booktabs = TRUE)
