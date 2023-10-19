@@ -1,6 +1,8 @@
 library(rvest)
 library(dplyr)
 library(janitor)
+library(stringr)
+library(kableExtra)
 
 
 semester <- "Spring 2024"
@@ -20,7 +22,7 @@ roster <- roster[[1]] %>%
 
 email <- 
   html_dat %>% 
-  html_nodes(xpath = "//a[starts-with(@href,'mailto:')]") %>% 
+  html_elements(xpath = "//a[starts-with(@href,'mailto:')]") %>% 
   html_attr("href")
 
 email <- 
