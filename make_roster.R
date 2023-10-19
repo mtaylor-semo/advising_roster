@@ -22,10 +22,8 @@ roster <- html_dat %>%
 email <- 
   html_dat %>% 
   html_elements(xpath = "//a[starts-with(@href,'mailto:')]") %>% 
-  html_attr("href")
-
-email <- 
-  email[length(email)] %>% 
+  html_attr("href") %>% 
+  last() %>% 
   stringr::str_remove("mailto:\\?Bcc=") %>% 
   stringr::str_split(pattern = ";") %>% 
   unlist()
