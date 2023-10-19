@@ -1,7 +1,8 @@
 .DStore
 
-# Do not commit the html roster files
+# Do not commit the html or PDF roster files
 *.html 
+*.pdf
 
 # History files
 .Rhistory
