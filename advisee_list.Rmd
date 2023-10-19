@@ -36,7 +36,7 @@ roster <- roster[[1]] %>%
 
 email <- 
   html_dat %>% 
-  html_nodes(xpath = "//a[starts-with(@href,'mailto:')]") %>% 
+  html_elements(xpath = "//a[starts-with(@href,'mailto:')]") %>% 
   html_attr("href")
 
 email <- 
