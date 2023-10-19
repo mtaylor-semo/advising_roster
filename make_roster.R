@@ -28,8 +28,14 @@ email <-
   stringr::str_split(pattern = ";") %>% 
   unlist()
 
-roster <- bind_cols(roster, tibble(email = email)) %>% 
-  select(`Student Name` = student_name, ID = id, Email = email, PIN = pin)
+roster <- 
+  bind_cols(
+    roster, 
+    tibble(Email = email)
+  ) %>% 
+  select(`Student Name` = student_name, ID = id, Email, PIN = pin) %>% 
+  mutate(ID = str_to_lower(ID),
+         PIN = str_replace_na(PIN, ""))
 
 num_advisees <- dim(roster)[1]
 

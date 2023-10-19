@@ -45,9 +45,9 @@ email <-
 roster <- 
   bind_cols(
     roster, 
-    tibble(email = email)
+    tibble(Email = email)
   ) %>% 
-  select(`Student Name` = student_name, ID = id, Email = email, PIN = pin) %>% 
+  select(`Student Name` = student_name, ID = id, Email, PIN = pin) %>% 
   mutate(ID = str_to_lower(ID),
          PIN = str_replace_na(PIN, ""))
 
