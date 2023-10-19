@@ -22,11 +22,13 @@ roster <- html_dat %>%
 email <- 
   html_dat %>% 
   html_elements(xpath = "//a[starts-with(@href,'mailto:')]") %>% 
-  html_attrs()
+  html_attr("href")
 
 email <- 
   email[length(email)] %>% 
-  stringr::str_remove("mailto:\\?Bcc=") %>% stringr::str_split(pattern = ";") %>% unlist()
+  stringr::str_remove("mailto:\\?Bcc=") %>% 
+  stringr::str_split(pattern = ";") %>% 
+  unlist()
 
 roster <- bind_cols(roster, tibble(email = email)) %>% 
   select(`Student Name` = student_name, ID = id, Email = email, PIN = pin)
