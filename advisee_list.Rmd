@@ -19,10 +19,11 @@ library(dplyr)
 library(stringr)
 library(kableExtra)
 
-semester <- "Spring 2024"
+semester <- "Fall 2024"
 advisor <- "Michael S. Taylor"
-
-html_dat <- read_html("./roster_s2024.html")
+file_name <- "roster_f2024"
+#file_name <- scan("file_name.txt", what = "character")
+html_dat <- read_html(paste0(file_name, ".html"))
 
 roster <- html_dat %>% 
   html_elements(css = ".datadisplaytable") %>% 
@@ -47,18 +48,18 @@ roster <-
     roster, 
     tibble(Email = email)
   ) %>% 
-  select(`Student Name` = student_name, ID = id, Email, PIN = pin) %>% 
-  mutate(ID = str_to_lower(ID),
-         PIN = str_replace_na(PIN, ""))
+  mutate(row = row_number()) |> 
+  select(row, `Student Name` = student_name, ID = id, Email, `Alternate PIN` = pin) %>% 
+  mutate(`Alternate PIN` = str_replace_na(`Alternate PIN`, ""))
 
 num_advisees <- dim(roster)[1]
 
 ```
 
-Michael S. Taylor \newline
-`r paste0(semester, " (", num_advisees, " advisees)")`
+\textsc{Taylor Advising Roster} \newline
+`r paste0(semester, " (", num_advisees, " advisees)")`\newline
 
 ```{r echo=FALSE}
-knitr::kable(roster, booktabs = TRUE)
+knitr::kable(roster, booktabs = TRUE, align = "rlllr", col.names = c("", "Student Name", "ID", "Email", "Alternate PIN"))
 ```
 

@@ -4,10 +4,10 @@ library(stringr)
 library(kableExtra)
 
 
-semester <- "Spring 2024"
+semester <- "Fall 2024"
 advisor <- "Michael S. Taylor"
 
-html_dat <- read_html("./roster_s2024.html")
+html_dat <- read_html("./roster_f2024.html")
 
 roster <- html_dat %>% 
   html_elements(css = ".datadisplaytable") %>% 
