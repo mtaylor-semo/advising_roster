@@ -10,6 +10,8 @@ Simple R script to make a table of my student advisees.
 
 * Save as roster_\[sf\]\[202x\].html
 
+* Edit roster to remove grad students. You must remove the individual rows from the table for each student *and* remove their email addresses from the `mailto:` lines.
+
 * Open _generate_list.R
 
 * Change file_name to roster_\[sf\]\[202x\]. (As above without html extension.)
@@ -18,7 +20,7 @@ Simple R script to make a table of my student advisees.
 
 * Source the file.
 
-## OLD INSTRUCTUIONS
+## OLD INSTRUCTIONS
 
 
 * Open advisee_list.Rmd. Edit `semester` to semester and year.
